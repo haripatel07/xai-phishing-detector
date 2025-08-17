@@ -1,0 +1,19 @@
+# Virtual Environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# IDE and OS specific files
+.idea/
+.vscode/
+.DS_Store
+
+# Data files
+data/phishing_data.csv
+data/processed_data.csv
+data/training_data_sample.csv
+
+# Trained Models
+models/*.joblib
