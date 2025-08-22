@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Phishing Detector</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AI Phishing Detector</h1>
+            <p class="subtitle">Enter a URL to analyze its potential threat using Explainable AI.</p>
+        </div>
+
+        <form action="/predict" method="post">
+            <input type="text" name="url" placeholder="e.g., https://www.google.com" value="{{ url or '' }}" required>
+            <input type="submit" value="Analyze">
+        </form>
+
+        {% if prediction_text %}
+            <div class="result-container">
+                <div class="result {% if 'Warning' in prediction_text %}malicious{% else %}benign{% endif %}">
+                    {% if 'Warning' in prediction_text %}
+                        <i data-lucide="alert-triangle"></i>
+                    {% else %}
+                        <i data-lucide="shield-check"></i>
+                    {% endif %}
+                    <span>{{ prediction_text }}</span>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if explanation %}
+            <div class="explanation">
+                <h2>Prediction Analysis</h2>
+                <div class="lime-explanation">
+                    {{ explanation | safe }}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
