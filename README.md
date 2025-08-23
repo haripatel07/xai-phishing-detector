@@ -5,7 +5,7 @@ A web application that uses a machine learning model to detect phishing URLs and
 This project demonstrates an end-to-end MLOps pipeline, from data processing and model training to deployment as an interactive web service. The core focus is on creating a reliable and trustworthy security tool.
 
 ---
-## Screenshot
+## Demo
 
 Here is a preview of the application's user interface.
 
