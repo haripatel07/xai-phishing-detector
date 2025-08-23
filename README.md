@@ -32,12 +32,12 @@ Here is a preview of the application's user interface.
 
 Follow these instructions to set up and run the project locally.
 
-### ### Prerequisites
+### Prerequisites
 
 - Python 3.8+
 - A virtual environment tool (`venv`)
 
-### ### Installation & Usage
+### Installation & Usage
 
 1.  **Clone the repository:**
     ```bash
