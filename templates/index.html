@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Phishing Detector</title>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
@@ -26,24 +23,55 @@
         </form>
 
         {% if prediction_text %}
-            <div class="result-container">
-                <div class="result {% if 'Warning' in prediction_text %}malicious{% else %}benign{% endif %}">
-                    {% if 'Warning' in prediction_text %}
-                        <i data-lucide="alert-triangle"></i>
+            <div class="result-card">
+                <div class="result-header {% if is_malicious %}malicious{% else %}benign{% endif %}">
+                    {% if is_malicious %}
+                        <i data-lucide="shield-alert"></i>
                     {% else %}
                         <i data-lucide="shield-check"></i>
                     {% endif %}
-                    <span>{{ prediction_text }}</span>
+                    <h2 class="result-title {% if is_malicious %}malicious{% else %}benign{% endif %}">
+                        {% if is_malicious %}Malicious Website Detected{% else %}Benign Website Detected{% endif %}
+                    </h2>
                 </div>
-            </div>
-        {% endif %}
 
-        {% if explanation %}
-            <div class="explanation">
-                <h2>Prediction Analysis</h2>
-                <div class="lime-explanation">
-                    {{ explanation | safe }}
+                <div class="confidence-bar-container">
+                    <div class="confidence-bar {% if is_malicious %}malicious{% else %}benign{% endif %}" style="width: {{ confidence }}%;">
+                        {{ confidence }}% Confidence
+                    </div>
                 </div>
+
+                {% if non_technical_summary %}
+                <div class="friendly-summary">
+                    <h3>Simple Explanation</h3>
+                    <p>{{ non_technical_summary }}</p>
+                </div>
+                {% endif %}
+
+                {% if natural_explanations %}
+                <div class="natural-explanation">
+                    <h3>Why this prediction?</h3>
+                    <ul>
+                        {% for item in natural_explanations %}
+                        <li>
+                            {% if item.type == 'risk' %}
+                                <i data-lucide="minus-circle" class="risk-factor"></i>
+                            {% else %}
+                                <i data-lucide="plus-circle" class="safe-factor"></i>
+                            {% endif %}
+                            <span>{{ item.text }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                
+                <details class="details-explainer">
+                    <summary>Show Detailed Technical Analysis</summary>
+                    <div class="lime-explanation">
+                        {{ explanation | safe }}
+                    </div>
+                </details>
             </div>
         {% endif %}
     </div>
