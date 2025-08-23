@@ -5,12 +5,11 @@ A web application that uses a machine learning model to detect phishing URLs and
 This project demonstrates an end-to-end MLOps pipeline, from data processing and model training to deployment as an interactive web service. The core focus is on creating a reliable and trustworthy security tool.
 
 ---
-## Screenshot
+## Demo
 
 Here is a preview of the application's user interface.
 
-
-
+![Demo](https://github.com/haripatel07/xai-phishing-detector/blob/main/pictures/AI%20Phishing%20Detector.png)
 ---
 ## Features
 
@@ -28,6 +27,21 @@ Here is a preview of the application's user interface.
 - **Deployment**: Local deployment via Flask's development server
 
 ---
+### Dataset Information
+
+* **Source:** [Phishing Site URLs – Kaggle](https://www.kaggle.com/datasets/taruntiwarihp/phishing-site-urls)
+* **Content:** The dataset contains **over 550,000 URLs**, each labeled as either **"good" (benign)** or **"bad" (malicious)**.
+* **Usage:** This dataset was used to train the phishing detection model by extracting lexical and structural features from URLs.
+* **Note:** Due to its large size, the dataset is **not included in this repository**.
+
+  * To run the training pipeline, download it directly from Kaggle and place it in the `data/` directory with the name:
+
+    ```
+    phishing_data.csv
+    ```
+
+---
+
 ## Getting Started
 
 Follow these instructions to set up and run the project locally.
