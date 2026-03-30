@@ -47,6 +47,10 @@ def _build_explainer(training_csv_path: str):
 def startup_event():
     global model, explainer, reference_cols
 
+    if os.getenv('SKIP_MODEL_LOAD', '0') == '1':
+        # Useful for tests to avoid requiring the real model files.
+        return
+
     model_path = _load_env_var('MODEL_PATH', 'models/phishing_detector_model.joblib')
     explainer_path = _load_env_var('EXPLAINER_PATH', '')
     training_sample_path = 'data/training_data_sample.csv'

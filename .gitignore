@@ -3,7 +3,9 @@ venv/
 
 # Python cache
 __pycache__/
+/__pycache__/
 *.pyc
+.pytest_cache/
 
 # IDE and OS specific files
 .idea/

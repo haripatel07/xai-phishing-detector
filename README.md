@@ -137,3 +137,14 @@ curl http://localhost:8000/health
 
 This project uses LIME (Local Interpretable Model-agnostic Explanations) to explain model predictions. For a given URL/text, it provides the top contributing features and whether they increase risk or reduce risk for the phishing prediction.
 
+## CI / Testing
+
+- Run unit tests:
+
+```bash
+pytest -q
+```
+
+- CI is configured in `.github/workflows/ci.yml` to validate push and pull requests.
+
+
