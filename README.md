@@ -103,3 +103,37 @@ The model was intentionally tuned to prioritize **recall for the malicious class
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+## Deployment
+
+1. Build the Docker image:
+
+```bash
+docker build -t ai-phishing-detector:latest .
+```
+
+2. Run it with environment variables:
+
+```bash
+docker run -p 8000:8000 --env-file .env.example ai-phishing-detector:latest
+```
+
+3. Verify status:
+
+```bash
+curl http://localhost:8000/health
+```
+
+## API Reference
+
+| Method | Endpoint  | Input            | Output |
+|--------|-----------|------------------|--------|
+| POST   | /predict  | {"url": "..."} or {"text": "..."} | {"label": "phishing"|"benign", "confidence": 0.97} |
+| POST   | /explain  | {"url": "..."} or {"text": "..."} | {"label": "phishing"|"benign", "confidence": 0.97, "top_features": [...] } |
+| GET    | /health   | —                | {"status": "ok"} |
+
+## Explainability
+
+This project uses LIME (Local Interpretable Model-agnostic Explanations) to explain model predictions. For a given URL/text, it provides the top contributing features and whether they increase risk or reduce risk for the phishing prediction.
+
